@@ -18,7 +18,6 @@ class MainActivity : AppCompatActivity() {
             // No custom time picker
             SnapTimePickerDialog.Builder().apply {
                 setTitle(R.string.title)
-
                 setTitleColor(R.color.colorWhite)}.build().apply {
                 setListener { hour, minute -> onTimePicked(hour, minute) }
             }.show(supportFragmentManager, SnapTimePickerDialog.TAG)
@@ -64,13 +63,13 @@ class MainActivity : AppCompatActivity() {
             // something that make configuration changes occur, you still get
             // event callback from LiveData.
             //
-            // See how can you get event callback from ViewModel at line 69.
+            // See how can you get event callback from ViewModel at line 73.
             SnapTimePickerDialog.Builder().apply {
                 useViewModel()
             }.build().show(supportFragmentManager, SnapTimePickerDialog.TAG)
         }
 
-        // This code is work with `useViewModel()` at line 66
+        // This code is work with `useViewModel()` at line 68
         SnapTimePickerUtil.observe(this) { selectedHour: Int, selectedMinute: Int ->
             onTimePicked(selectedHour, selectedMinute)
         }
