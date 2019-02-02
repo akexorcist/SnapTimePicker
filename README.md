@@ -2,7 +2,7 @@ Snap Time Picker
 ==============================
 Another Material Time Picker for developer who do not like default Material Time Picker that difficult to use for most users
 
-![Snap Time Picker Sample](https://raw.githubusercontent.com/akexorcist/Android-SnapTimePicker/master/image/01_default.jpg)
+![Snap Time Picker Sample](https://raw.githubusercontent.com/akexorcist/Android-SnapTimePicker/master/image/00_header.gif)
 
 Download
 ===============================
@@ -27,6 +27,8 @@ Feature
 * Some text & color customization
 * Selectable time range support
 * ViewModel support for event callback with LiveData (See example)
+
+![Snap Time Picker Sample](https://raw.githubusercontent.com/akexorcist/Android-SnapTimePicker/master/image/01_default.jpg)
 
 Usage
 ===========================
