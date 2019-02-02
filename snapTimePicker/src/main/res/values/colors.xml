@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="snap_time_picker_transparent_white">#00ffffff</color>
+    <color name="snap_time_picker_white">#FFFFFF</color>
+    <color name="snap_time_picker_black">#333333</color>
+    <color name="snap_time_picker_black_5">#0c000000</color>
+    <color name="snap_time_picker_default_primary">#008577</color>
+    <color name="snap_time_picker_default_accent">#D81B60</color>
+    <color name="snap_time_picker_light_gray">#c2c2c2</color>
+    <color name="snap_time_picker_extra_light_gray">#ebebeb</color>
+</resources>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="margin_padding">8dp</dimen>
+    <dimen name="margin_padding_large">16dp</dimen>
+    <dimen name="margin_padding_extra_large">24dp</dimen>
+    <dimen name="margin_padding_extra_extra_large">32dp</dimen>
+    <dimen name="prefix_time_text_size">16sp</dimen>
+    <dimen name="selected_time_text_size">48sp</dimen>
+    <dimen name="shadow_size">8dp</dimen>
+    <dimen name="button_width">200dp</dimen>
+</resources>

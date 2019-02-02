@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="SnapTimePicker" />
+
+    <style name="SnapTimePicker.Title">
+        <item name="android:textColor">@color/snap_time_picker_white</item>
+        <item name="android:textSize">@dimen/snap_time_picker_text_size_large</item>
+    </style>
+
+    <style name="SnapTimePicker.Content">
+        <item name="android:textColor">@color/snap_time_picker_black</item>
+        <item name="android:textSize">@dimen/snap_time_picker_text_size_medium</item>
+    </style>
+
+    <style name="SnapTimePicker.Button">
+        <item name="android:textColor">@color/snap_time_picker_default_primary</item>
+        <item name="android:textSize">@dimen/snap_time_picker_text_size_medium</item>
+        <item name="android:background">
+            @drawable/snap_time_picker_selector_button_translucent_black_round
+        </item>
+        <item name="android:minWidth">@dimen/snap_time_picker_button_minimum_width</item>
+        <item name="android:paddingEnd">@dimen/snap_time_picker_margin_padding_large</item>
+        <item name="android:paddingStart">@dimen/snap_time_picker_margin_padding_large</item>
+    </style>
+
+    <style name="SnapTimePicker.HorizontalDivider">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/snap_time_picker_divider_size</item>
+        <item name="android:background">@color/snap_time_picker_extra_light_gray</item>
+    </style>
+</resources>

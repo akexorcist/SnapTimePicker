@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="@dimen/snap_time_picker_dialog_width"
+        android:layout_height="@dimen/snap_time_picker_dialog_height"
+        android:layout_gravity="center"
+        android:background="@drawable/snap_time_picker_shape_background_white">
+
+        <TextView
+            android:id="@+id/snap_time_picker_text_view_title"
+            style="@style/SnapTimePicker.Title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@color/snap_time_picker_default_primary"
+            android:padding="@dimen/snap_time_picker_margin_padding_large"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <LinearLayout
+            android:id="@+id/snap_time_picker_layout_time_container"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginBottom="@dimen/snap_time_picker_margin_padding"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toTopOf="@id/snap_time_picker_barrier_bottom"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/snap_time_picker_text_view_title">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/snap_time_picker_recycler_view_hour"
+                android:layout_width="@dimen/snap_time_picker_slot_width"
+                android:layout_height="match_parent"
+                android:clipToPadding="false"
+                android:overScrollMode="never"
+                android:paddingTop="@dimen/snap_time_picker_recycler_view_padding_vertical"
+                android:paddingBottom="@dimen/snap_time_picker_recycler_view_padding_vertical"
+                tools:listitem="@layout/layout_snap_time_picker_number_item" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/snap_time_picker_recycler_view_minute"
+                android:layout_width="@dimen/snap_time_picker_slot_width"
+                android:layout_height="match_parent"
+                android:clipToPadding="false"
+                android:overScrollMode="never"
+                android:paddingTop="@dimen/snap_time_picker_recycler_view_padding_vertical"
+                android:paddingBottom="@dimen/snap_time_picker_recycler_view_padding_vertical"
+                tools:listitem="@layout/layout_snap_time_picker_number_item" />
+        </LinearLayout>
+
+        <View
+            android:id="@+id/snap_time_picker_view_selected_value_area"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/snap_time_picker_selected_area_height"
+            android:layout_gravity="center"
+            app:layout_constraintBottom_toBottomOf="@id/snap_time_picker_layout_time_container"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/snap_time_picker_layout_time_container" />
+
+        <View
+            style="@style/SnapTimePicker.HorizontalDivider"
+            android:layout_width="0dp"
+            app:layout_constraintBottom_toTopOf="@id/snap_time_picker_view_selected_value_area"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <View
+            style="@style/SnapTimePicker.HorizontalDivider"
+            android:layout_width="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/snap_time_picker_view_selected_value_area" />
+
+        <TextView
+            style="@style/SnapTimePicker.Content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/snap_time_picker_margin_padding_extra_small"
+            android:gravity="center"
+            android:text="@string/snap_time_picker_separator"
+            app:layout_constraintBottom_toBottomOf="@id/snap_time_picker_view_selected_value_area"
+            app:layout_constraintEnd_toEndOf="@id/snap_time_picker_view_selected_value_area"
+            app:layout_constraintStart_toStartOf="@id/snap_time_picker_view_selected_value_area"
+            app:layout_constraintTop_toTopOf="@id/snap_time_picker_view_selected_value_area" />
+
+        <TextView
+            android:id="@+id/snap_time_picker_text_view_time_prefix"
+            style="@style/SnapTimePicker.Content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/snap_time_picker_margin_padding_extra_extra_small"
+            android:gravity="center"
+            app:layout_constraintBottom_toBottomOf="@id/snap_time_picker_view_selected_value_area"
+            app:layout_constraintEnd_toStartOf="@id/snap_time_picker_layout_time_container"
+            app:layout_constraintTop_toTopOf="@id/snap_time_picker_view_selected_value_area" />
+
+        <TextView
+            android:id="@+id/snap_time_picker_text_view_time_suffix"
+            style="@style/SnapTimePicker.Content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/snap_time_picker_margin_padding_extra_extra_small"
+            android:gravity="center"
+            app:layout_constraintBottom_toBottomOf="@id/snap_time_picker_view_selected_value_area"
+            app:layout_constraintStart_toEndOf="@id/snap_time_picker_layout_time_container"
+            app:layout_constraintTop_toTopOf="@id/snap_time_picker_view_selected_value_area" />
+
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/snap_time_picker_barrier_bottom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:barrierDirection="top"
+            app:constraint_referenced_ids="snap_time_picker_button_cancel,snap_time_picker_button_confirm" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="@dimen/snap_time_picker_recycler_view_shadow_height"
+            android:background="@drawable/snap_time_picker_shadow_bottom_translucent_white"
+            app:layout_constraintBottom_toBottomOf="@id/snap_time_picker_layout_time_container"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="@dimen/snap_time_picker_recycler_view_shadow_height"
+            android:background="@drawable/snap_time_picker_shadow_top_translucent_white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/snap_time_picker_layout_time_container" />
+
+        <Button
+            android:id="@+id/snap_time_picker_button_cancel"
+            style="@style/SnapTimePicker.Button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/snap_time_picker_cancel"
+            app:layout_constraintBottom_toBottomOf="@id/snap_time_picker_button_confirm"
+            app:layout_constraintEnd_toStartOf="@id/snap_time_picker_button_confirm" />
+
+        <Button
+            android:id="@+id/snap_time_picker_button_confirm"
+            style="@style/SnapTimePicker.Button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/snap_time_picker_margin_padding"
+            android:layout_marginEnd="@dimen/snap_time_picker_margin_padding"
+            android:layout_marginBottom="@dimen/snap_time_picker_margin_padding"
+            android:text="@string/snap_time_picker_confirm"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>

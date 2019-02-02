@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        tools:context=".MainActivity">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="@dimen/margin_padding_extra_extra_large">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/selected_time_prefix"
+                android:textSize="@dimen/prefix_time_text_size" />
+
+            <TextView
+                android:id="@+id/textViewTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/default_selected_time"
+                android:textSize="@dimen/selected_time_text_size" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/shadow_size"
+            android:background="@drawable/shape_gradient_bottom" />
+
+        <Button
+            android:id="@+id/buttonNoCustomTimePicker"
+            android:layout_width="@dimen/button_width"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/margin_padding_extra_large"
+            android:text="@string/use_case_no_custom"
+            android:textAllCaps="false" />
+
+        <Button
+            android:id="@+id/buttonFullCustomTimePicker"
+            android:layout_width="@dimen/button_width"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/margin_padding"
+            android:text="@string/use_case_full_custom"
+            android:textAllCaps="false" />
+
+        <Button
+            android:id="@+id/buttonPreselectedTime"
+            android:layout_width="@dimen/button_width"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/margin_padding"
+            android:text="@string/use_case_preselected_time"
+            android:textAllCaps="false" />
+
+        <Button
+            android:id="@+id/buttonTimeRange"
+            android:layout_width="@dimen/button_width"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/margin_padding"
+            android:text="@string/use_case_time_range"
+            android:textAllCaps="false" />
+
+        <Button
+            android:id="@+id/buttonViewModelCallback"
+            android:layout_width="@dimen/button_width"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/margin_padding"
+            android:layout_marginBottom="@dimen/margin_padding_extra_large"
+            android:text="@string/use_case_view_model_callback"
+            android:textAllCaps="false" />
+
+    </LinearLayout>
+</ScrollView>

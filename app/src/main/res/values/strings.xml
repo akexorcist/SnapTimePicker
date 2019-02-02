@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">Snap Time Picker</string>
+    <string name="title">Please select the time</string>
+    <string name="selected_time_prefix">Your selected time is</string>
+    <string name="default_selected_time">-</string>
+    <string name="selected_time_format">%1$s:%2$s</string>
+    <string name="time_prefix">&gt;&gt;</string>
+    <string name="time_suffix">&lt;&lt;</string>
+    <string name="use_case_no_custom">No Custom</string>
+    <string name="use_case_full_custom">Full Custom</string>
+    <string name="use_case_preselected_time">Pre-selected Time</string>
+    <string name="use_case_time_range">Time Range</string>
+    <string name="use_case_view_model_callback">ViewModel Callback</string>
+</resources>

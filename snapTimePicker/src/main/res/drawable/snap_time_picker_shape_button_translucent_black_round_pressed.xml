@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <corners android:radius="@dimen/snap_time_picker_button_corner_radius"/>
+    <solid android:color="@color/snap_time_picker_black_5"/>
+    <padding
+            android:bottom="@dimen/snap_time_picker_margin_padding"
+            android:left="@dimen/snap_time_picker_margin_padding"
+            android:right="@dimen/snap_time_picker_margin_padding"
+            android:top="@dimen/snap_time_picker_margin_padding"/>
+</shape>
