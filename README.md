@@ -1,3 +1,5 @@
+[ ![Download](https://api.bintray.com/packages/akexorcist/maven/snap-time-picker/images/download.svg?version=1.0.0) ](https://bintray.com/akexorcist/maven/snap-time-picker/1.0.0/link)
+
 Snap Time Picker
 ==============================
 Another Material Time Picker for developer who do not like default Material Time Picker that difficult to use for most users
