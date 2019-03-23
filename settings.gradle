@@ -1,1 +1,1 @@
-include ':app', ':snapTimePicker'
+include ':app', ':snap-time-picker'
