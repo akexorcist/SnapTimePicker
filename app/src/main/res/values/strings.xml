@@ -11,4 +11,5 @@
     <string name="use_case_preselected_time">Pre-selected Time</string>
     <string name="use_case_time_range">Time Range</string>
     <string name="use_case_view_model_callback">ViewModel Callback</string>
+    <string name="use_case_time_interval">Time interval</string>
 </resources>
