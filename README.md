@@ -20,7 +20,7 @@ Maven
 
 Gradle
 ```
-compile 'com.akexorcist:snaptimepicker:1.0.0'
+implementation 'com.akexorcist:snap-time-picker:1.0.0'
 ```
 
 Feature
