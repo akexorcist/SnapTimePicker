@@ -56,6 +56,15 @@ class MainActivity : AppCompatActivity() {
             }.show(supportFragmentManager, SnapTimePickerDialog.TAG)
         }
 
+        buttonTimeInterval.setOnClickListener {
+            SnapTimePickerDialog.Builder().apply {
+                setTimeInterval(7)
+                setTitle(R.string.title)
+                setTitleColor(R.color.colorWhite)}.build().apply {
+                setListener { hour, minute -> onTimePicked(hour, minute) }
+            }.show(supportFragmentManager, SnapTimePickerDialog.TAG)
+        }
+
         buttonViewModelCallback.setOnClickListener {
             // Get event callback from ViewModel observing. No need listener
             //
