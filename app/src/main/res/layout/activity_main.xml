@@ -73,6 +73,15 @@
             android:textAllCaps="false" />
 
         <Button
+            android:id="@+id/buttonTimeInterval"
+            android:layout_width="@dimen/button_width"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/margin_padding"
+            android:text="@string/use_case_time_interval"
+            android:textAllCaps="false" />
+
+        <Button
             android:id="@+id/buttonViewModelCallback"
             android:layout_width="@dimen/button_width"
             android:layout_height="wrap_content"

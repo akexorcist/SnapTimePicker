@@ -20,7 +20,7 @@ Maven
 
 Gradle
 ```
-compile 'com.akexorcist:snap-time-picker:1.0.0'
+implementation 'com.akexorcist:snap-time-picker:1.0.0'
 ```
 
 Feature
@@ -99,6 +99,10 @@ SnapTimePickerUtil.observe(this) { selectedHour: Int, selectedMinute: Int ->
 ```
 
 SnapTimePickerDialog can be called from anywhere in your code but `SnapTimePickerUtil.observe(...)` must called in `onCreate()` only (That's how ViewModel and LiveData works).
+
+Special Thanks
+===========================
+@theerasan-salutat
 
 Licence
 ===========================

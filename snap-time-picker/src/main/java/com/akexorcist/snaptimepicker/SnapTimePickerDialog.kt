@@ -42,6 +42,7 @@ class SnapTimePickerDialog : BaseSnapTimePickerDialogFragment() {
     private var suffix: Int = -1
     private var titleColor: Int = -1
     private var themeColor: Int = -1
+    private var timeInterval: Int = 1
     private var listener: Listener? = null
 
     private var lastSelectedHour = -1
@@ -58,10 +59,12 @@ class SnapTimePickerDialog : BaseSnapTimePickerDialogFragment() {
         private const val EXTRA_PREFIX = "com.akexorcist.snaptimepicker.prefix"
         private const val EXTRA_TITLE_COLOR = "com.akexorcist.snaptimepicker.title_color"
         private const val EXTRA_THEME_COLOR = "com.akexorcist.snaptimepicker.theme_color"
+        private const val EXTRA_TIME_INTERVAL = "com.akexorcist.snaptimepicker.time_interval"
         private const val MIN_HOUR = 0
         private const val MAX_HOUR = 23
         private const val MIN_MINUTE = 0
         private const val MAX_MINUTE = 59
+        private const val MINUTE_IN_HOUR = 60
         private const val UPDATE_PRE_SELECTED_START_TIME = 100L
         const val TAG = "SnapTimePickerDialog"
 
@@ -73,7 +76,8 @@ class SnapTimePickerDialog : BaseSnapTimePickerDialogFragment() {
             prefix: Int,
             suffix: Int,
             titleColor: Int,
-            themeColor: Int
+            themeColor: Int,
+            timeInterval: Int
         ): SnapTimePickerDialog = SnapTimePickerDialog().apply {
             isCancelable = false
             arguments = Bundle().apply {
@@ -85,6 +89,7 @@ class SnapTimePickerDialog : BaseSnapTimePickerDialogFragment() {
                 putInt(EXTRA_SUFFIX, suffix)
                 putInt(EXTRA_TITLE_COLOR, titleColor)
                 putInt(EXTRA_THEME_COLOR, themeColor)
+                putInt(EXTRA_TIME_INTERVAL, timeInterval)
             }
         }
     }
@@ -149,6 +154,7 @@ class SnapTimePickerDialog : BaseSnapTimePickerDialogFragment() {
         suffix = bundle?.getInt(EXTRA_SUFFIX, -1) ?: -1
         themeColor = bundle?.getInt(EXTRA_THEME_COLOR, -1) ?: -1
         titleColor = bundle?.getInt(EXTRA_TITLE_COLOR, -1) ?: -1
+        timeInterval = bundle?.getInt(EXTRA_TIME_INTERVAL, 1) ?: 1
     }
 
     override fun initialize() {
@@ -166,6 +172,7 @@ class SnapTimePickerDialog : BaseSnapTimePickerDialogFragment() {
         suffix = savedInstanceState?.getInt(EXTRA_SUFFIX, -1) ?: -1
         themeColor = savedInstanceState?.getInt(EXTRA_THEME_COLOR, -1) ?: -1
         titleColor = savedInstanceState?.getInt(EXTRA_TITLE_COLOR, -1) ?: -1
+        timeInterval = savedInstanceState?.getInt(EXTRA_TIME_INTERVAL, 1) ?: 1
     }
 
     override fun restore() {
@@ -184,6 +191,7 @@ class SnapTimePickerDialog : BaseSnapTimePickerDialogFragment() {
         outState?.putInt(EXTRA_SUFFIX, suffix)
         outState?.putInt(EXTRA_THEME_COLOR, themeColor)
         outState?.putInt(EXTRA_TITLE_COLOR, titleColor)
+        outState?.putInt(EXTRA_TIME_INTERVAL, timeInterval)
     }
 
     override fun setup() {}
@@ -338,8 +346,8 @@ class SnapTimePickerDialog : BaseSnapTimePickerDialogFragment() {
 
     private fun initMinuteList(includeAll: Boolean) {
         this.minuteList = listOf()
-        for (index in MIN_MINUTE..MAX_MINUTE) {
-            minuteList += index
+        for (index in MIN_MINUTE until (MINUTE_IN_HOUR / timeInterval)) {
+            minuteList += index * this.timeInterval
         }
         minuteAdapter.setItemList(minuteList)
         if (!includeAll && preselectedTime != null &&
@@ -530,6 +538,7 @@ class SnapTimePickerDialog : BaseSnapTimePickerDialogFragment() {
         private var suffix: Int = -1
         private var titleColor: Int = -1
         private var themeColor: Int = -1
+        private var timeInterval: Int = 1
 
         fun setPreselectedTime(time: TimeValue): Builder = this.apply {
             preselectedTime = time
@@ -559,6 +568,10 @@ class SnapTimePickerDialog : BaseSnapTimePickerDialogFragment() {
             themeColor = colorResId
         }
 
+        fun setTimeInterval(interval: Int): Builder = this.apply {
+            timeInterval = interval
+        }
+
         fun useViewModel(): Builder = this.apply {
             isUseViewModel = true
         }
@@ -572,7 +585,8 @@ class SnapTimePickerDialog : BaseSnapTimePickerDialogFragment() {
                 prefix,
                 suffix,
                 titleColor,
-                themeColor
+                themeColor,
+                timeInterval
             )
     }
 }
