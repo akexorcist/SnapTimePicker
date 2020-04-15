@@ -13,14 +13,14 @@ Maven
 ```
 <dependency>
   <groupId>com.akexorcist</groupId>
-  <artifactId>snaptimepicker</artifactId>
+  <artifactId>snap-time-picker</artifactId>
   <version>1.0.0</version>
 </dependency>
 ```
 
 Gradle
 ```
-compile 'com.akexorcist:snaptimepicker:1.0.0'
+compile 'com.akexorcist:snap-time-picker:1.0.0'
 ```
 
 Feature
