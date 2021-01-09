@@ -1,4 +1,5 @@
-[ ![Download](https://api.bintray.com/packages/akexorcist/maven/snap-time-picker/images/download.svg?version=1.0.0) ](https://bintray.com/akexorcist/maven/snap-time-picker/1.0.0/link)
+[ ![Download](https://api.bintray.com/packages/akexorcist/maven/snap-time-picker/images/download.svg)](https://bintray.com/akexorcist/maven/snap-time-picker)
+![Minimum SDK Version](https://img.shields.io/badge/minSdkVersion-18-brightgreen) 
 
 Snap Time Picker
 ==============================
