@@ -25,18 +25,14 @@ abstract class BaseSnapTimePickerDialogFragment : DialogFragment() {
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        val builder = AlertDialog.Builder(context!!)
-        val view = LayoutInflater.from(context).inflate(setupLayoutView(), null)
+        val builder = AlertDialog.Builder(requireContext())
+        val view = setupLayoutView()
         rootView = view
         builder.setView(view)
         val dialog = builder.create()
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         return dialog
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -55,8 +51,7 @@ abstract class BaseSnapTimePickerDialogFragment : DialogFragment() {
         saveInstanceState(outState)
     }
 
-    @LayoutRes
-    abstract fun setupLayoutView(): Int
+    abstract fun setupLayoutView(): View
 
     abstract fun prepare()
 

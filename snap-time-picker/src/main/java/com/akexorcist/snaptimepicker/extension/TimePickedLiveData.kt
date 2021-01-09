@@ -11,7 +11,7 @@ class TimePickedLiveData<T> : MutableLiveData<T>() {
     private val mPending = AtomicBoolean(false)
 
     companion object {
-        private val TAG = "TimePickedLiveData"
+        private const val TAG = "TimePickedLiveData"
     }
 
     @MainThread
@@ -22,19 +22,20 @@ class TimePickedLiveData<T> : MutableLiveData<T>() {
         }
 
         // Observe the internal MutableLiveData
-        super.observe(owner, Observer { t ->
+        super.observe(owner, { value ->
             if (mPending.compareAndSet(true, false)) {
-                observer.onChanged(t)
+                observer.onChanged(value)
             }
         })
     }
 
     @MainThread
-    override fun setValue(t: T?) {
+    override fun setValue(value: T?) {
         mPending.set(true)
-        super.setValue(t)
+        super.setValue(value)
     }
 
+    @Suppress("unused")
     @MainThread
     fun call() {
         value = null

@@ -6,15 +6,18 @@ import com.akexorcist.snaptimepicker.SnapTimePickerDialog
 import com.akexorcist.snaptimepicker.TimeRange
 import com.akexorcist.snaptimepicker.TimeValue
 import com.akexorcist.snaptimepicker.extension.SnapTimePickerUtil
-import kotlinx.android.synthetic.main.activity_main.*
+import com.akexorcist.snaptimepicker.sample.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
+    private val binding : ActivityMainBinding by lazy {
+        ActivityMainBinding.inflate(layoutInflater)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(binding.root)
 
-        buttonNoCustomTimePicker.setOnClickListener {
+        binding.buttonNoCustomTimePicker.setOnClickListener {
             // No custom time picker
             SnapTimePickerDialog.Builder().apply {
                 setTitle(R.string.title)
@@ -23,7 +26,7 @@ class MainActivity : AppCompatActivity() {
             }.show(supportFragmentManager, SnapTimePickerDialog.TAG)
         }
 
-        buttonFullCustomTimePicker.setOnClickListener {
+        binding.buttonFullCustomTimePicker.setOnClickListener {
             // Custom text and color
             SnapTimePickerDialog.Builder().apply {
                 setTitle(R.string.title)
@@ -36,7 +39,7 @@ class MainActivity : AppCompatActivity() {
             }.show(supportFragmentManager, SnapTimePickerDialog.TAG)
         }
 
-        buttonPreselectedTime.setOnClickListener {
+        binding.buttonPreselectedTime.setOnClickListener {
             // Set pre-selected time
             SnapTimePickerDialog.Builder().apply {
                 setPreselectedTime(TimeValue(2, 15))
@@ -45,7 +48,7 @@ class MainActivity : AppCompatActivity() {
             }.show(supportFragmentManager, SnapTimePickerDialog.TAG)
         }
 
-        buttonTimeRange.setOnClickListener {
+        binding.buttonTimeRange.setOnClickListener {
             // Set selectable time range
             SnapTimePickerDialog.Builder().apply {
                 val start = TimeValue(2, 15)
@@ -56,7 +59,7 @@ class MainActivity : AppCompatActivity() {
             }.show(supportFragmentManager, SnapTimePickerDialog.TAG)
         }
 
-        buttonTimeInterval.setOnClickListener {
+        binding.buttonTimeInterval.setOnClickListener {
             SnapTimePickerDialog.Builder().apply {
                 setTimeInterval(7)
                 setTitle(R.string.title)
@@ -65,20 +68,20 @@ class MainActivity : AppCompatActivity() {
             }.show(supportFragmentManager, SnapTimePickerDialog.TAG)
         }
 
-        buttonViewModelCallback.setOnClickListener {
+        binding.buttonViewModelCallback.setOnClickListener {
             // Get event callback from ViewModel observing. No need listener
             //
             // This very useful when you use ViewModel. Although user do
             // something that make configuration changes occur, you still get
             // event callback from LiveData.
             //
-            // See how can you get event callback from ViewModel at line 73.
+            // See how can you get event callback from ViewModel at line 85
             SnapTimePickerDialog.Builder().apply {
                 useViewModel()
             }.build().show(supportFragmentManager, SnapTimePickerDialog.TAG)
         }
 
-        // This code is work with `useViewModel()` at line 68
+        // This code is work with `useViewModel()` at line 80
         SnapTimePickerUtil.observe(this) { selectedHour: Int, selectedMinute: Int ->
             onTimePicked(selectedHour, selectedMinute)
         }
@@ -87,6 +90,6 @@ class MainActivity : AppCompatActivity() {
     private fun onTimePicked(selectedHour: Int, selectedMinute: Int) {
         val hour = selectedHour.toString().padStart(2, '0')
         val minute = selectedMinute.toString().padStart(2, '0')
-        textViewTime.text = String.format(getString(R.string.selected_time_format, hour, minute))
+        binding.textViewTime.text = String.format(getString(R.string.selected_time_format, hour, minute))
     }
 }

@@ -4,25 +4,24 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
-import android.widget.Button
-import android.widget.TextView
+import android.os.Looper
+import android.view.LayoutInflater
+import android.view.View
 import androidx.annotation.ColorRes
 import androidx.annotation.StringRes
 import androidx.core.content.ContextCompat
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearSnapHelper
 import androidx.recyclerview.widget.RecyclerView
+import com.akexorcist.snaptimepicker.databinding.LayoutSnapTimePickerDialogBinding
 import com.akexorcist.snaptimepicker.extension.SnapTimePickerViewModel
 
+@Suppress("unused")
 class SnapTimePickerDialog : BaseSnapTimePickerDialogFragment() {
-    private val buttonCancel: Button by lazy { rootView.findViewById<Button>(R.id.snap_time_picker_button_cancel) }
-    private val buttonConfirm: Button by lazy { rootView.findViewById<Button>(R.id.snap_time_picker_button_confirm) }
-    private val recyclerViewHour: RecyclerView by lazy { rootView.findViewById<RecyclerView>(R.id.snap_time_picker_recycler_view_hour) }
-    private val recyclerViewMinute: RecyclerView by lazy { rootView.findViewById<RecyclerView>(R.id.snap_time_picker_recycler_view_minute) }
-    private val textViewTitle: TextView by lazy { rootView.findViewById<TextView>(R.id.snap_time_picker_text_view_title) }
-    private val textViewTimePrefix: TextView by lazy { rootView.findViewById<TextView>(R.id.snap_time_picker_text_view_time_prefix) }
-    private val textViewTimeSuffix: TextView by lazy { rootView.findViewById<TextView>(R.id.snap_time_picker_text_view_time_suffix) }
+    private val binding: LayoutSnapTimePickerDialogBinding by lazy {
+        LayoutSnapTimePickerDialogBinding.inflate(LayoutInflater.from(requireContext()))
+    }
 
     private lateinit var hourAdapter: TimePickerAdapter
     private lateinit var minuteAdapter: TimePickerAdapter
@@ -49,11 +48,13 @@ class SnapTimePickerDialog : BaseSnapTimePickerDialogFragment() {
     private var lastSelectedMinute = -1
 
     companion object {
-        private const val EXTRA_SELECTABLE_TIME_RANGE = "com.akexorcist.snaptimepicker.selectable_time_range"
+        private const val EXTRA_SELECTABLE_TIME_RANGE =
+            "com.akexorcist.snaptimepicker.selectable_time_range"
         private const val EXTRA_PRESELECTED_TIME = "com.akexorcist.snaptimepicker.preselected_time"
         private const val EXTRA_SELECTED_HOUR = "com.akexorcist.snaptimepicker.selected_hour"
         private const val EXTRA_SELECTED_MINUTE = "com.akexorcist.snaptimepicker.selected_minute"
-        private const val EXTRA_IS_USE_VIEW_MODEL = "com.akexorcist.snaptimepicker.is_use_view_model"
+        private const val EXTRA_IS_USE_VIEW_MODEL =
+            "com.akexorcist.snaptimepicker.is_use_view_model"
         private const val EXTRA_TITLE = "com.akexorcist.snaptimepicker.title"
         private const val EXTRA_SUFFIX = "com.akexorcist.snaptimepicker.suffix"
         private const val EXTRA_PREFIX = "com.akexorcist.snaptimepicker.prefix"
@@ -94,7 +95,7 @@ class SnapTimePickerDialog : BaseSnapTimePickerDialogFragment() {
         }
     }
 
-    override fun setupLayoutView(): Int = R.layout.layout_snap_time_picker_dialog
+    override fun setupLayoutView(): View = binding.root
 
     override fun prepare() {
         run {
@@ -104,36 +105,45 @@ class SnapTimePickerDialog : BaseSnapTimePickerDialogFragment() {
             minuteLayoutManager = LinearLayoutManager(context)
             hourSnapHelper = LinearSnapHelper()
             minuteSnapHelper = LinearSnapHelper()
-            recyclerViewHour.layoutManager = hourLayoutManager
-            recyclerViewHour.adapter = hourAdapter
-            hourSnapHelper.attachToRecyclerView(recyclerViewHour)
-            recyclerViewMinute.layoutManager = minuteLayoutManager
-            recyclerViewMinute.adapter = minuteAdapter
-            minuteSnapHelper.attachToRecyclerView(recyclerViewMinute)
+            binding.recyclerViewHour.layoutManager = hourLayoutManager
+            binding.recyclerViewHour.adapter = hourAdapter
+            hourSnapHelper.attachToRecyclerView(binding.recyclerViewHour)
+            binding.recyclerViewMinute.layoutManager = minuteLayoutManager
+            binding.recyclerViewMinute.adapter = minuteAdapter
+            minuteSnapHelper.attachToRecyclerView(binding.recyclerViewMinute)
             if (title != -1) {
-                textViewTitle.text = getString(title)
+                binding.textViewTitle.text = getString(title)
             }
             if (prefix != -1) {
-                textViewTimePrefix.text = getString(prefix)
+                binding.textViewTimePrefix.text = getString(prefix)
             }
             if (suffix != -1) {
-                textViewTimeSuffix.text = getString(suffix)
+                binding.textViewTimeSuffix.text = getString(suffix)
             }
             if (titleColor != -1) {
-                context?.let { context -> textViewTitle.setTextColor(ContextCompat.getColor(context, titleColor)) }
+                context?.let { context ->
+                    binding.textViewTitle.setTextColor(
+                        ContextCompat.getColor(
+                            context,
+                            titleColor
+                        )
+                    )
+                }
             }
             if (themeColor != -1) {
                 context?.let { context ->
-                    buttonConfirm.setTextColor(ContextCompat.getColor(context, themeColor))
-                    buttonCancel.setTextColor(ContextCompat.getColor(context, themeColor))
-                    textViewTitle.setBackgroundColor(ContextCompat.getColor(context, themeColor))
+                    binding.buttonConfirm.setTextColor(ContextCompat.getColor(context, themeColor))
+                    binding.buttonCancel.setTextColor(ContextCompat.getColor(context, themeColor))
+                    binding.textViewTitle.setBackgroundColor(
+                        ContextCompat.getColor(context, themeColor)
+                    )
                 }
             }
             run {
-                buttonConfirm.setOnClickListener { onConfirmClick() }
-                buttonCancel.setOnClickListener { onCancelClick() }
-                recyclerViewHour.addOnScrollListener(hourScrollListener)
-                recyclerViewMinute.addOnScrollListener(minuteScrollListener)
+                binding.buttonConfirm.setOnClickListener { onConfirmClick() }
+                binding.buttonCancel.setOnClickListener { onCancelClick() }
+                binding.recyclerViewHour.addOnScrollListener(hourScrollListener)
+                binding.recyclerViewMinute.addOnScrollListener(minuteScrollListener)
             }
             run {
                 resetPreselectedTimeWhenNeed()
@@ -198,8 +208,8 @@ class SnapTimePickerDialog : BaseSnapTimePickerDialogFragment() {
 
     override fun onDestroy() {
         super.onDestroy()
-        recyclerViewHour.removeOnScrollListener(hourScrollListener)
-        recyclerViewMinute.removeOnScrollListener(minuteScrollListener)
+        binding.recyclerViewHour.removeOnScrollListener(hourScrollListener)
+        binding.recyclerViewMinute.removeOnScrollListener(minuteScrollListener)
     }
 
     private val hourScrollListener = object : RecyclerView.OnScrollListener() {
@@ -209,7 +219,8 @@ class SnapTimePickerDialog : BaseSnapTimePickerDialogFragment() {
                 var currentSelectedHour = -1
                 val hourSnappedView = hourSnapHelper.findSnapView(hourLayoutManager)
                 hourSnappedView?.let { view ->
-                    currentSelectedHour = hourAdapter.getValueByPosition(hourLayoutManager.getPosition(view))
+                    currentSelectedHour =
+                        hourAdapter.getValueByPosition(hourLayoutManager.getPosition(view))
                 }
                 updateSelectableTime(currentSelectedHour, lastSelectedMinute)
                 lastSelectedHour = currentSelectedHour
@@ -224,7 +235,8 @@ class SnapTimePickerDialog : BaseSnapTimePickerDialogFragment() {
                 var currentSelectedMinute = -1
                 val minuteSnappedView = minuteSnapHelper.findSnapView(minuteLayoutManager)
                 minuteSnappedView?.let { view ->
-                    currentSelectedMinute = minuteAdapter.getValueByPosition(minuteLayoutManager.getPosition(view))
+                    currentSelectedMinute =
+                        minuteAdapter.getValueByPosition(minuteLayoutManager.getPosition(view))
                 }
                 updateSelectableTime(lastSelectedHour, currentSelectedMinute)
                 lastSelectedMinute = currentSelectedMinute
@@ -309,35 +321,35 @@ class SnapTimePickerDialog : BaseSnapTimePickerDialogFragment() {
             for (index in MIN_HOUR..MAX_HOUR) {
                 if (startHour != -1 && endHour != -1) {
                     if (index in startHour..endHour) {
-                        hourList += index
+                        hourList = hourList + index
                     }
                 } else {
-                    hourList += index
+                    hourList = hourList + index
                 }
             }
         } else if (isLaterSelectableTime()) {
             if (startHour != -1 && endHour != -1) {
                 for (index in startHour..MAX_HOUR) {
                     if (index in startHour..MAX_HOUR || index in MIN_HOUR..endHour) {
-                        hourList += index
+                        hourList = hourList + index
                     }
                 }
                 for (index in MIN_HOUR..endHour) {
                     if (index in startHour..MAX_HOUR || index in MIN_HOUR..endHour) {
-                        hourList += index
+                        hourList = hourList + index
                     }
                 }
             } else {
                 for (index in MIN_HOUR..MAX_HOUR) {
-                    hourList += index
+                    hourList = hourList + index
                 }
             }
         } else {
             if (startHour != -1 && endHour != -1) {
-                hourList += startHour
+                hourList = hourList + startHour
             } else {
                 for (index in MIN_HOUR..MAX_HOUR) {
-                    hourList += index
+                    hourList = hourList + index
                 }
             }
         }
@@ -347,7 +359,7 @@ class SnapTimePickerDialog : BaseSnapTimePickerDialogFragment() {
     private fun initMinuteList(includeAll: Boolean) {
         this.minuteList = listOf()
         for (index in MIN_MINUTE until (MINUTE_IN_HOUR / timeInterval)) {
-            minuteList += index * this.timeInterval
+            minuteList = minuteList + index * this.timeInterval
         }
         minuteAdapter.setItemList(minuteList)
         if (!includeAll && preselectedTime != null &&
@@ -374,11 +386,11 @@ class SnapTimePickerDialog : BaseSnapTimePickerDialogFragment() {
             return false
         }
         return if (startHour < endHour || (startHour == endHour && startMinute < endMinute)) {
-            (expectHour in (startHour + 1)..(endHour - 1)) ||
+            (expectHour in (startHour + 1) until endHour) ||
                     (expectHour == startHour && expectMinute >= startMinute) ||
                     (expectHour == endHour && expectMinute <= endMinute)
         } else if (startHour > endHour || (startHour == endHour && startHour > endHour)) {
-            (expectHour in (endHour + 1)..(startHour - 1)) ||
+            (expectHour in (endHour + 1) until startHour) ||
                     (expectHour == endHour && expectMinute >= endMinute) ||
                     (expectHour == startHour && expectMinute <= startMinute)
         } else {
@@ -391,10 +403,10 @@ class SnapTimePickerDialog : BaseSnapTimePickerDialogFragment() {
         for (index in MIN_MINUTE..MAX_MINUTE) {
             if (startMinute != -1 && endMinute != -1) {
                 if (index in startMinute..endMinute) {
-                    minuteList += index
+                    minuteList = minuteList + index
                 }
             } else {
-                minuteList += index
+                minuteList = minuteList + index
             }
         }
         minuteAdapter.setItemList(minuteList)
@@ -426,7 +438,7 @@ class SnapTimePickerDialog : BaseSnapTimePickerDialogFragment() {
             isEarlierSelectableTime() -> preSelectedHour < startHour || preSelectedHour > endHour ||
                     (preSelectedHour == startHour && preSelectedMinute < startMinute) ||
                     (preSelectedHour == endHour && preSelectedMinute > endMinute)
-            isLaterSelectableTime() -> (preSelectedHour in (endHour + 1)..(startHour - 1)) ||
+            isLaterSelectableTime() -> (preSelectedHour in (endHour + 1) until startHour) ||
                     (preSelectedHour == startHour && preSelectedMinute < startMinute) ||
                     (preSelectedHour == endHour && preSelectedMinute > endMinute)
             else -> false
@@ -434,8 +446,8 @@ class SnapTimePickerDialog : BaseSnapTimePickerDialogFragment() {
     }
 
     private fun setupPreselectedTime(selectedTime: TimeValue? = preselectedTime) {
-        recyclerViewHour.scrollToPosition(1)
-        recyclerViewMinute.scrollToPosition(1)
+        binding.recyclerViewHour.scrollToPosition(1)
+        binding.recyclerViewMinute.scrollToPosition(1)
         selectedTime?.let { time ->
             val selectedHour = time.hour
             val selectedMinute = time.minute
@@ -451,9 +463,9 @@ class SnapTimePickerDialog : BaseSnapTimePickerDialogFragment() {
 
     private fun updateHourPosition(hourPosition: Int) {
         try {
-            Handler().postDelayed({
+            Handler(Looper.getMainLooper()).postDelayed({
                 if (hourPosition != -1) {
-                    recyclerViewHour.smoothScrollToPosition(hourPosition)
+                    binding.recyclerViewHour.smoothScrollToPosition(hourPosition)
                 }
             }, UPDATE_PRE_SELECTED_START_TIME)
         } catch (ignored: IllegalArgumentException) {
@@ -462,9 +474,9 @@ class SnapTimePickerDialog : BaseSnapTimePickerDialogFragment() {
 
     private fun updateMinutePosition(minutePosition: Int) {
         try {
-            Handler().postDelayed({
+            Handler(Looper.getMainLooper()).postDelayed({
                 if (minutePosition != -1) {
-                    recyclerViewMinute.smoothScrollToPosition(minutePosition)
+                    binding.recyclerViewMinute.smoothScrollToPosition(minutePosition)
                 }
             }, UPDATE_PRE_SELECTED_START_TIME)
         } catch (ignored: IllegalArgumentException) {
@@ -472,9 +484,9 @@ class SnapTimePickerDialog : BaseSnapTimePickerDialogFragment() {
     }
 
     private fun useLiveDataAsCallback() {
-        activity?.let { activity ->
+        activity?.let { _ ->
             val viewModel: SnapTimePickerViewModel =
-                ViewModelProviders.of(activity).get(SnapTimePickerViewModel::class.java)
+                ViewModelProvider(this).get(SnapTimePickerViewModel::class.java)
             this.listener = object : Listener {
                 override fun onTimePicked(hour: Int, minute: Int) {
                     viewModel.onTimePicked(hour, minute)
@@ -491,7 +503,9 @@ class SnapTimePickerDialog : BaseSnapTimePickerDialogFragment() {
             minute = minuteAdapter.getValueByPosition(minuteLayoutManager.getPosition(view))
         }
         val hourSnappedView = hourSnapHelper.findSnapView(hourLayoutManager)
-        hourSnappedView?.let { view -> hour = hourAdapter.getValueByPosition(hourLayoutManager.getPosition(view)) }
+        hourSnappedView?.let { view ->
+            hour = hourAdapter.getValueByPosition(hourLayoutManager.getPosition(view))
+        }
         listener?.onTimePicked(hour, minute)
         targetFragment?.onActivityResult(targetRequestCode, Activity.RESULT_OK, Intent().apply {
             putExtra(EXTRA_SELECTED_HOUR, hour)
@@ -529,7 +543,7 @@ class SnapTimePickerDialog : BaseSnapTimePickerDialogFragment() {
         fun onTimePicked(hour: Int, minute: Int)
     }
 
-    class Builder() {
+    class Builder {
         private var selectableTimeRange: TimeRange? = null
         private var preselectedTime: TimeValue? = null
         private var isUseViewModel: Boolean = false
@@ -577,7 +591,7 @@ class SnapTimePickerDialog : BaseSnapTimePickerDialogFragment() {
         }
 
         fun build(): SnapTimePickerDialog =
-            SnapTimePickerDialog.newInstance(
+            newInstance(
                 selectableTimeRange,
                 preselectedTime,
                 isUseViewModel,
@@ -590,4 +604,3 @@ class SnapTimePickerDialog : BaseSnapTimePickerDialogFragment() {
             )
     }
 }
-

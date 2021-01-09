@@ -3,12 +3,19 @@ package com.akexorcist.snaptimepicker
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.akexorcist.snaptimepicker.databinding.LayoutSnapTimePickerNumberItemBinding
 
 class TimePickerAdapter : RecyclerView.Adapter<TimeNumberViewHolder>() {
     private var itemList: List<Int>? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, type: Int): TimeNumberViewHolder =
-            TimeNumberViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.layout_snap_time_picker_number_item, parent, false))
+        TimeNumberViewHolder(
+            LayoutSnapTimePickerNumberItemBinding.inflate(
+                LayoutInflater.from(
+                    parent.context
+                ), parent, false
+            )
+        )
 
     override fun getItemCount(): Int = itemList?.size ?: 0
 
