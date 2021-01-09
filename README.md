@@ -14,13 +14,13 @@ Maven
 <dependency>
   <groupId>com.akexorcist</groupId>
   <artifactId>snap-time-picker</artifactId>
-  <version>1.0.0</version>
+  <version>1.0.1</version>
 </dependency>
 ```
 
 Gradle
 ```
-implementation 'com.akexorcist:snap-time-picker:1.0.0'
+implementation 'com.akexorcist:snap-time-picker:1.0.1'
 ```
 
 Feature
@@ -46,7 +46,9 @@ val dialog = SnapTimePickerDialog.Builder().build()
 dialog.show(supportFragmentManager, tag)
 ```
 
-SnapTimePickerDialog made from DialogFragment (AndroidX) so it need SupportFragmentManager from Activity/Fragment and any string tag. If you have no idea for the dialog tag. You can use `SnapTimePickerDialog.TAG` 
+SnapTimePickerDialog made from DialogFragment (AndroidX) so it need SupportFragmentManager from Activity/Fragment and any string tag. If you have no idea for the dialog tag. You can use `SnapTimePickerDialog.TAG`
+
+Note - Cannot reuse the SnapTimePickerDialog instance. Please create new instance every time 
 
 To custom some text and color in TimePickerDialog. 
 ```kotlin
@@ -106,7 +108,7 @@ Special Thanks
 
 Licence
 ===========================
-Copyright 2019 Akexorcist
+Copyright 2020 Akexorcist
 
 Licensed under the Apache License, Version 2.0 (the "License"); you may not use this work except in compliance with the License. You may obtain a copy of the License in the LICENSE file, or at:
 
