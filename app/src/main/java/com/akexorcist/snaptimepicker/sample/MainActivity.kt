@@ -9,7 +9,7 @@ import com.akexorcist.snaptimepicker.extension.SnapTimePickerUtil
 import com.akexorcist.snaptimepicker.sample.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
-    private val binding : ActivityMainBinding by lazy {
+    private val binding: ActivityMainBinding by lazy {
         ActivityMainBinding.inflate(layoutInflater)
     }
 
@@ -21,7 +21,8 @@ class MainActivity : AppCompatActivity() {
             // No custom time picker
             SnapTimePickerDialog.Builder().apply {
                 setTitle(R.string.title)
-                setTitleColor(R.color.colorWhite)}.build().apply {
+                setTitleColor(R.color.colorWhite)
+            }.build().apply {
                 setListener { hour, minute -> onTimePicked(hour, minute) }
             }.show(supportFragmentManager, SnapTimePickerDialog.TAG)
         }
@@ -63,7 +64,8 @@ class MainActivity : AppCompatActivity() {
             SnapTimePickerDialog.Builder().apply {
                 setTimeInterval(7)
                 setTitle(R.string.title)
-                setTitleColor(R.color.colorWhite)}.build().apply {
+                setTitleColor(R.color.colorWhite)
+            }.build().apply {
                 setListener { hour, minute -> onTimePicked(hour, minute) }
             }.show(supportFragmentManager, SnapTimePickerDialog.TAG)
         }
@@ -90,6 +92,7 @@ class MainActivity : AppCompatActivity() {
     private fun onTimePicked(selectedHour: Int, selectedMinute: Int) {
         val hour = selectedHour.toString().padStart(2, '0')
         val minute = selectedMinute.toString().padStart(2, '0')
-        binding.textViewTime.text = String.format(getString(R.string.selected_time_format, hour, minute))
+        binding.textViewTime.text =
+            String.format(getString(R.string.selected_time_format, hour, minute))
     }
 }
