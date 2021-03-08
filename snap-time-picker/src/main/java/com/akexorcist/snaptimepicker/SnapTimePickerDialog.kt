@@ -148,14 +148,10 @@ class SnapTimePickerDialog : BaseSnapTimePickerDialogFragment() {
                 }
             }
             if (negativeButtonText != -1) {
-                context?.let { context ->
-                    binding.buttonCancel.text = getString(negativeButtonText)
-                }
+                binding.buttonCancel.text = getString(negativeButtonText)
             }
             if (positiveButtonText != -1) {
-                context?.let { context ->
-                    binding.buttonConfirm.text = getString(positiveButtonText)
-                }
+                binding.buttonConfirm.text = getString(positiveButtonText)
             }
             run {
                 binding.buttonConfirm.setOnClickListener { onConfirmClick() }
