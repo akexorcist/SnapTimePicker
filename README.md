@@ -15,18 +15,18 @@ Maven
 <dependency>
   <groupId>com.akexorcist</groupId>
   <artifactId>snap-time-picker</artifactId>
-  <version>1.0.1</version>
+  <version>1.0.2</version>
 </dependency>
 ```
 
 Gradle
 ```
-implementation 'com.akexorcist:snap-time-picker:1.0.1'
+implementation 'com.akexorcist:snap-time-picker:1.0.2'
 ```
 
 Feature
 ===========================
-* iOS Time Picker like with Material Design style 
+* iOS Time Picker with Material Design style 
 * Some text & color customization
 * Selectable time range support
 * ViewModel support for event callback with LiveData (See example)
@@ -68,6 +68,16 @@ SnapTimePickerDialog.Builder().apply {
 
 ![Color Customization](https://raw.githubusercontent.com/akexorcist/Android-SnapTimePicker/master/image/03_color.jpg)
 
+To custom the positive and negative button text.
+```kotlin
+SnapTimePickerDialog.Builder().apply {
+    setPositiveButtonText(R.string.accept)
+    setNegativeButtonText(R.string.reject)
+    setButtonTextAllCaps(false)
+}.build().show(supportFragmentManager, tag)
+```
+Positive and negative button text will be all-capitalized by default.
+
 To set pre-selected time and time range in TimePickerDialog. 
 ```kotlin
 SnapTimePickerDialog.Builder().apply {
@@ -106,10 +116,11 @@ SnapTimePickerDialog can be called from anywhere in your code but `SnapTimePicke
 Special Thanks
 ===========================
 @theerasan-salutat
+@adrianhartanto004
 
 Licence
 ===========================
-Copyright 2020 Akexorcist
+Copyright 2021 Akexorcist
 
 Licensed under the Apache License, Version 2.0 (the "License"); you may not use this work except in compliance with the License. You may obtain a copy of the License in the LICENSE file, or at:
 
