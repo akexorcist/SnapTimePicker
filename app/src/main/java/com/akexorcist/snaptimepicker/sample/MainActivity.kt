@@ -35,6 +35,7 @@ class MainActivity : AppCompatActivity() {
                 setSuffix(R.string.time_suffix)
                 setThemeColor(R.color.colorAccent)
                 setTitleColor(R.color.colorWhite)
+                setButtonTextAllCaps(false)
             }.build().apply {
                 setListener { hour, minute -> onTimePicked(hour, minute) }
             }.show(supportFragmentManager, SnapTimePickerDialog.TAG)

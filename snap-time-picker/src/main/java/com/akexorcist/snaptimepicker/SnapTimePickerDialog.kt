@@ -43,6 +43,7 @@ class SnapTimePickerDialog : BaseSnapTimePickerDialogFragment() {
     private var themeColor: Int = -1
     private var negativeButtonText: Int = -1
     private var positiveButtonText: Int = -1
+    private var buttonTextAllCaps = true
     private var timeInterval: Int = 1
     private var listener: Listener? = null
 
@@ -50,13 +51,11 @@ class SnapTimePickerDialog : BaseSnapTimePickerDialogFragment() {
     private var lastSelectedMinute = -1
 
     companion object {
-        private const val EXTRA_SELECTABLE_TIME_RANGE =
-            "com.akexorcist.snaptimepicker.selectable_time_range"
+        private const val EXTRA_SELECTABLE_TIME_RANGE = "com.akexorcist.snaptimepicker.selectable_time_range"
         private const val EXTRA_PRESELECTED_TIME = "com.akexorcist.snaptimepicker.preselected_time"
         private const val EXTRA_SELECTED_HOUR = "com.akexorcist.snaptimepicker.selected_hour"
         private const val EXTRA_SELECTED_MINUTE = "com.akexorcist.snaptimepicker.selected_minute"
-        private const val EXTRA_IS_USE_VIEW_MODEL =
-            "com.akexorcist.snaptimepicker.is_use_view_model"
+        private const val EXTRA_IS_USE_VIEW_MODEL = "com.akexorcist.snaptimepicker.is_use_view_model"
         private const val EXTRA_TITLE = "com.akexorcist.snaptimepicker.title"
         private const val EXTRA_SUFFIX = "com.akexorcist.snaptimepicker.suffix"
         private const val EXTRA_PREFIX = "com.akexorcist.snaptimepicker.prefix"
@@ -64,6 +63,7 @@ class SnapTimePickerDialog : BaseSnapTimePickerDialogFragment() {
         private const val EXTRA_THEME_COLOR = "com.akexorcist.snaptimepicker.theme_color"
         private const val EXTRA_NEGATIVE_BUTTON_TEXT = "com.akexorcist.snaptimepicker.negative_button_text"
         private const val EXTRA_POSITIVE_BUTTON_TEXT = "com.akexorcist.snaptimepicker.positive_button_text"
+        private const val EXTRA_BUTTON_TEXT_ALL_CAPS = "com.akexorcist.snaptimepicker.button_text_all_caps"
         private const val EXTRA_TIME_INTERVAL = "com.akexorcist.snaptimepicker.time_interval"
         private const val MIN_HOUR = 0
         private const val MAX_HOUR = 23
@@ -84,6 +84,7 @@ class SnapTimePickerDialog : BaseSnapTimePickerDialogFragment() {
             themeColor: Int,
             negativeButtonText: Int,
             positiveButtonText: Int,
+            buttonTextAllCaps: Boolean,
             timeInterval: Int
         ): SnapTimePickerDialog = SnapTimePickerDialog().apply {
             isCancelable = false
@@ -98,6 +99,7 @@ class SnapTimePickerDialog : BaseSnapTimePickerDialogFragment() {
                 putInt(EXTRA_THEME_COLOR, themeColor)
                 putInt(EXTRA_NEGATIVE_BUTTON_TEXT, negativeButtonText)
                 putInt(EXTRA_POSITIVE_BUTTON_TEXT, positiveButtonText)
+                putBoolean(EXTRA_BUTTON_TEXT_ALL_CAPS, buttonTextAllCaps)
                 putInt(EXTRA_TIME_INTERVAL, timeInterval)
             }
         }
@@ -147,13 +149,16 @@ class SnapTimePickerDialog : BaseSnapTimePickerDialogFragment() {
                     )
                 }
             }
-            if (negativeButtonText != -1) {
-                binding.buttonCancel.text = getString(negativeButtonText)
-            }
             if (positiveButtonText != -1) {
                 binding.buttonConfirm.text = getString(positiveButtonText)
             }
+            if (negativeButtonText != -1) {
+                binding.buttonCancel.text = getString(negativeButtonText)
+            }
+
             run {
+                binding.buttonConfirm.isAllCaps = buttonTextAllCaps
+                binding.buttonCancel.isAllCaps = buttonTextAllCaps
                 binding.buttonConfirm.setOnClickListener { onConfirmClick() }
                 binding.buttonCancel.setOnClickListener { onCancelClick() }
                 binding.recyclerViewHour.addOnScrollListener(hourScrollListener)
@@ -180,6 +185,7 @@ class SnapTimePickerDialog : BaseSnapTimePickerDialogFragment() {
         titleColor = bundle?.getInt(EXTRA_TITLE_COLOR, -1) ?: -1
         negativeButtonText = bundle?.getInt(EXTRA_NEGATIVE_BUTTON_TEXT, -1) ?: -1
         positiveButtonText = bundle?.getInt(EXTRA_POSITIVE_BUTTON_TEXT, -1) ?: -1
+        buttonTextAllCaps = bundle?.getBoolean(EXTRA_BUTTON_TEXT_ALL_CAPS, true) ?: true
         timeInterval = bundle?.getInt(EXTRA_TIME_INTERVAL, 1) ?: 1
     }
 
@@ -200,6 +206,7 @@ class SnapTimePickerDialog : BaseSnapTimePickerDialogFragment() {
         titleColor = savedInstanceState?.getInt(EXTRA_TITLE_COLOR, -1) ?: -1
         negativeButtonText = savedInstanceState?.getInt(EXTRA_NEGATIVE_BUTTON_TEXT, -1) ?: -1
         positiveButtonText = savedInstanceState?.getInt(EXTRA_POSITIVE_BUTTON_TEXT, -1) ?: -1
+        buttonTextAllCaps = savedInstanceState?.getBoolean(EXTRA_BUTTON_TEXT_ALL_CAPS, true) ?: true
         timeInterval = savedInstanceState?.getInt(EXTRA_TIME_INTERVAL, 1) ?: 1
     }
 
@@ -221,6 +228,7 @@ class SnapTimePickerDialog : BaseSnapTimePickerDialogFragment() {
         outState?.putInt(EXTRA_TITLE_COLOR, titleColor)
         outState?.putInt(EXTRA_NEGATIVE_BUTTON_TEXT, negativeButtonText)
         outState?.putInt(EXTRA_POSITIVE_BUTTON_TEXT, positiveButtonText)
+        outState?.putBoolean(EXTRA_BUTTON_TEXT_ALL_CAPS, buttonTextAllCaps)
         outState?.putInt(EXTRA_TIME_INTERVAL, timeInterval)
     }
 
@@ -306,6 +314,7 @@ class SnapTimePickerDialog : BaseSnapTimePickerDialogFragment() {
 
     fun getPositiveButtonText(): String = getString(positiveButtonText)
 
+    fun isButtonTextAllCaps(): Boolean = buttonTextAllCaps
 
     private fun updateSelectableTime(currentSelectedHour: Int, currentSelectedMinute: Int) {
         if (currentSelectedHour != -1 && currentSelectedMinute != -1) {
@@ -579,6 +588,7 @@ class SnapTimePickerDialog : BaseSnapTimePickerDialogFragment() {
         private var themeColor: Int = -1
         private var negativeButtonText: Int = -1
         private var positiveButtonText: Int = -1
+        private var buttonTextAllCaps: Boolean = true
         private var timeInterval: Int = 1
 
         fun setPreselectedTime(time: TimeValue): Builder = this.apply {
@@ -617,6 +627,10 @@ class SnapTimePickerDialog : BaseSnapTimePickerDialogFragment() {
             positiveButtonText = positiveButtonTextId
         }
 
+        fun setButtonTextAllCaps(isAllCaps: Boolean) {
+            buttonTextAllCaps = isAllCaps
+        }
+
         fun setTimeInterval(interval: Int): Builder = this.apply {
             timeInterval = interval
         }
@@ -637,6 +651,7 @@ class SnapTimePickerDialog : BaseSnapTimePickerDialogFragment() {
                 themeColor,
                 negativeButtonText,
                 positiveButtonText,
+                buttonTextAllCaps,
                 timeInterval
             )
     }
