@@ -223,6 +223,8 @@ class SnapTimePickerDialog : BaseSnapTimePickerDialogFragment() {
         outState?.putInt(EXTRA_SUFFIX, suffix)
         outState?.putInt(EXTRA_THEME_COLOR, themeColor)
         outState?.putInt(EXTRA_TITLE_COLOR, titleColor)
+        outState?.putInt(EXTRA_NEGATIVE_BUTTON_TEXT, negativeButtonText)
+        outState?.putInt(EXTRA_POSITIVE_BUTTON_TEXT, positiveButtonText)
         outState?.putInt(EXTRA_TIME_INTERVAL, timeInterval)
     }
 
