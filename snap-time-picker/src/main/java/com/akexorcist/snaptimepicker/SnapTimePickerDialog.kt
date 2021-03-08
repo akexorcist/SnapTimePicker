@@ -148,14 +148,10 @@ class SnapTimePickerDialog : BaseSnapTimePickerDialogFragment() {
                 }
             }
             if (negativeButtonText != -1) {
-                context?.let { context ->
-                    binding.buttonCancel.text = getString(negativeButtonText)
-                }
+                binding.buttonCancel.text = getString(negativeButtonText)
             }
             if (positiveButtonText != -1) {
-                context?.let { context ->
-                    binding.buttonConfirm.text = getString(positiveButtonText)
-                }
+                binding.buttonConfirm.text = getString(positiveButtonText)
             }
             run {
                 binding.buttonConfirm.setOnClickListener { onConfirmClick() }
@@ -223,6 +219,8 @@ class SnapTimePickerDialog : BaseSnapTimePickerDialogFragment() {
         outState?.putInt(EXTRA_SUFFIX, suffix)
         outState?.putInt(EXTRA_THEME_COLOR, themeColor)
         outState?.putInt(EXTRA_TITLE_COLOR, titleColor)
+        outState?.putInt(EXTRA_NEGATIVE_BUTTON_TEXT, negativeButtonText)
+        outState?.putInt(EXTRA_POSITIVE_BUTTON_TEXT, positiveButtonText)
         outState?.putInt(EXTRA_TIME_INTERVAL, timeInterval)
     }
 
