@@ -8,8 +8,8 @@ android {
     defaultConfig {
         minSdkVersion 18
         targetSdkVersion 30
-        versionCode 10002
-        versionName "1.0.2"
+        versionCode 10003
+        versionName "1.0.3"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -57,7 +57,7 @@ ext {
     siteUrl = 'https://github.com/akexorcist/Android-SnapTimePicker'
     gitUrl = 'https://github.com/akexorcist/Android-SnapTimePicker.git'
 
-    libraryVersion = '1.0.2'
+    libraryVersion = '1.0.3'
 
     developerId = 'akexorcist'
     developerName = 'Somkiat Khitwongwattana'
