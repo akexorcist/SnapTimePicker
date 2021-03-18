@@ -15,13 +15,13 @@ Maven
 <dependency>
   <groupId>com.akexorcist</groupId>
   <artifactId>snap-time-picker</artifactId>
-  <version>1.0.2</version>
+  <version>1.0.3</version>
 </dependency>
 ```
 
 Gradle
 ```
-implementation 'com.akexorcist:snap-time-picker:1.0.2'
+implementation 'com.akexorcist:snap-time-picker:1.0.3'
 ```
 
 Feature
@@ -68,11 +68,13 @@ SnapTimePickerDialog.Builder().apply {
 
 ![Color Customization](https://raw.githubusercontent.com/akexorcist/Android-SnapTimePicker/master/image/03_color.jpg)
 
-To custom the positive and negative button text.
+To custom the positive and negative button.
 ```kotlin
 SnapTimePickerDialog.Builder().apply {
     setPositiveButtonText(R.string.accept)
     setNegativeButtonText(R.string.reject)
+    setPositiveButtonColor(R.color.white)
+    setNegativeButtonColor(R.color.white)
     setButtonTextAllCaps(false)
 }.build().show(supportFragmentManager, tag)
 ```
