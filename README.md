@@ -9,17 +9,18 @@ Another Material Time Picker for developer who do not like default Material Time
 
 Download
 ===============================
-
-Maven
+Since version 1.0.3 will [move from JCenter to MavenCentral](https://developer.android.com/studio/build/jcenter-migration)
+```groovy
+// build.gradle (project)
+allprojects {
+    repositories {
+        mavenCentral()
+        /* ... */
+    }
+}
 ```
-<dependency>
-  <groupId>com.akexorcist</groupId>
-  <artifactId>snap-time-picker</artifactId>
-  <version>1.0.3</version>
-</dependency>
-```
 
-Gradle
+**Gradle**
 ```
 implementation 'com.akexorcist:snap-time-picker:1.0.3'
 ```
@@ -115,10 +116,6 @@ SnapTimePickerUtil.observe(this) { selectedHour: Int, selectedMinute: Int ->
 
 SnapTimePickerDialog can be called from anywhere in your code but `SnapTimePickerUtil.observe(...)` must called in `onCreate()` only (That's how ViewModel and LiveData works).
 
-Special Thanks
-===========================
-@theerasan-salutat
-@adrianhartanto004
 
 Licence
 ===========================

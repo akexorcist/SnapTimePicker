@@ -4,12 +4,13 @@ apply plugin: 'kotlin-parcelize'
 apply plugin: 'org.jetbrains.dokka-android'
 
 android {
-    compileSdkVersion 30
+    compileSdkVersion project.compileSdkVersion
+
     defaultConfig {
-        minSdkVersion 18
-        targetSdkVersion 30
-        versionCode 10003
-        versionName "1.0.3"
+        minSdkVersion project.minSdkVersion
+        targetSdkVersion project.targetSdkVersion
+        versionCode project.versionCode
+        versionName project.versionName
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -44,29 +45,4 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-extensions:2.2.0"
 }
 
-ext {
-    bintrayRepo = 'maven'
-    bintrayName = 'snap-time-picker'
-
-    publishedGroupId = 'com.akexorcist'
-    libraryName = 'SnapTimePicker'
-    artifact = 'snap-time-picker'
-
-    libraryDescription = 'Another Material Time Picker for developer who do not like default Material Time Picker that difficult to use for most users'
-
-    siteUrl = 'https://github.com/akexorcist/Android-SnapTimePicker'
-    gitUrl = 'https://github.com/akexorcist/Android-SnapTimePicker.git'
-
-    libraryVersion = '1.0.3'
-
-    developerId = 'akexorcist'
-    developerName = 'Somkiat Khitwongwattana'
-    developerEmail = 'akexorcist@gmail.com'
-
-    licenseName = 'The Apache Software License, Version 2.0'
-    licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
-    allLicenses = ["Apache-2.0"]
-}
-
-//apply from: '../publish/installv1.gradle'
-//apply from: '../publish/bintrayv1.gradle'
+//apply from: '../publish/mavencentral.gradle'
