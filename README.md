@@ -1,5 +1,7 @@
-[ ![Download](https://api.bintray.com/packages/akexorcist/maven/snap-time-picker/images/download.svg)](https://bintray.com/akexorcist/maven/snap-time-picker)
+[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-SnapTimePicker-brightgreen.svg?style=flat)](https://android-arsenal.com/details/1/8107)
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.akexorcist/snap-time-picker/badge.svg)](https://search.maven.org/artifact/com.akexorcist/snap-time-picker)
 ![Minimum SDK Version](https://img.shields.io/badge/minSdkVersion-18-brightgreen) 
+[![Workflow Status](https://github.com/akexorcist/SnapTimePicker/actions/workflows/android.yml/badge.svg)](https://github.com/akexorcist/SnapTimePicker/actions)
 
 Snap Time Picker
 ==============================
